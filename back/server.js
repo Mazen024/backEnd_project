@@ -10,27 +10,27 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 
-// app.post('/Signin', async (req, res) => {
-//     const { username, password, confirmPassword, email, phoneNumber, country } = req.body;
+app.post('/Signin', async (req, res) => {
+    const { username, password, confirmPassword, email, phoneNumber, country } = req.body;
 
-//     if (!email.endsWith('@gmail.com')) {
-//         return res.status(400).json({ error: 'Email must be a valid Gmail address.' });
-//     }
+    if (!email.endsWith('@gmail.com')) {
+        return res.status(400).json({ error: 'Email must be a valid Gmail address.' });
+    }
 
-//     if (password !== confirmPassword) {
-//         return res.status(400).send("Passwords do not match");
-//     }
+    if (password !== confirmPassword) {
+        return res.status(400).send("Passwords do not match");
+    }
 
-//     const usernameExists = await User.findOne({ username });
-//     if (usernameExists) {
-//         return res.status(400).json({ error: 'Username is already in use.' });
-//     }
+    const usernameExists = await User.findOne({ username });
+    if (usernameExists) {
+        return res.status(400).json({ error: 'Username is already in use.' });
+    }
 
-//     const emailExists = await User.findOne({ email });
-//     if (emailExists) {
-//         return res.status(400).send('Email is already registered');
+    const emailExists = await User.findOne({ email });
+    if (emailExists) {
+        return res.status(400).send('Email is already registered');
 
-//     }
+    }
 
     const newUser = new User({ username, password, confirmPassword, email, phoneNumber, country });
     
